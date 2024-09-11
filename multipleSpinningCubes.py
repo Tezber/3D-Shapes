@@ -32,14 +32,12 @@ pointsArr.append(points)
 #all cubes
 for a in range(len(nCube_Values)):
     pointsArr.append(new_cube(points, nCube_Values[a][0], nCube_Values[a][1]))
-print(pointsArr)
 
 #all points in 3 dimensions
 projected_points = []
 for a in range(len(pointsArr)):
     projected_points.append([[n, n] for n in range(len(pointsArr[a]))])
 print(projected_points)
-
 #line creation
 def connect_points(i, j, points):
     pygame.draw.line(screen, WHITE, (points[i][0], points[i][1]), (points[j][0], points[j][1]))
@@ -49,8 +47,8 @@ def connect_points(i, j, points):
 #variables for the cube projection/rotation
 scale = 25
 positions = [300, 300]
-rotation_speed = 0.02
-angle = 0
+rSpeed = 0.02
+angle_x = angle_y = angle_z = 0
 while True:
     clock.tick(60)
     screen.fill(BLACK)
@@ -58,11 +56,11 @@ while True:
     #draw the dots
     for x in range(len(pointsArr)):
         for y in range(len(projected_points)):
-            projection_points(pointsArr[x], positions, scale, angle, screen, RED, projected_points)
-    angle += 0.01
+            projection_points(pointsArr[x], positions, scale, angle_x, angle_y, angle_z, screen, RED, projected_points)
+
     #draw the lines
-    for p in range(4):
-        for q in range(len(projected_points)):
+    for q in range(len(projected_points)):
+        for p in range(4):
             connect_points(p, (p+1) % 4, projected_points[q])
             connect_points(p+4, ((p+1) % 4) + 4, projected_points[q])
             connect_points(p, (p+4), projected_points[q])
@@ -73,4 +71,26 @@ while True:
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
                 pygame.quit()
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if event.button == 4:
+                scale += 0.5
+            elif event.button == 5:
+                scale -= 0.5
+
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_r]:
+            angle_y = angle_x = angle_z = 0
+            scale = 25
+        if keys[pygame.K_a]:
+            angle_y += rSpeed
+        if keys[pygame.K_d]:
+            angle_y -= rSpeed      
+        if keys[pygame.K_w]:
+            angle_x += rSpeed
+        if keys[pygame.K_s]:
+            angle_x -= rSpeed
+        if keys[pygame.K_q]:
+            angle_z -= rSpeed
+        if keys[pygame.K_e]:
+            angle_z += rSpeed
     pygame.display.update()
