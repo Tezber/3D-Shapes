@@ -19,12 +19,12 @@ def new_cube(points, plane, value):
 def projected_pointer(points):
     return [[n, n] for n in range(len(points))]
 
-def projection_points(points, position, scale, angle, screen, colour, projectionPointed):
+def projection_points(points, position, scale, angle_x, angle_y, angle_z, screen, colour, projectionPointed):
     i = 0
     for point in points:
-        rotated2d = np.dot(rotation_z(angle), point.reshape((3,1)))
-        rotated2d = np.dot(rotation_y(angle), rotated2d)
-        rotated2d = np.dot(rotation_x(angle), rotated2d)
+        rotated2d = np.dot(rotation_z(angle_z), point.reshape((3,1)))
+        rotated2d = np.dot(rotation_y(angle_y), rotated2d)
+        rotated2d = np.dot(rotation_x(angle_x), rotated2d)
 
         projected2d = np.dot(projection_matrix(), rotated2d)
 
