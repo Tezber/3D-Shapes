@@ -3,3 +3,15 @@ https://en.wikipedia.org/wiki/Rotation_matrix
 https://technology.cpm.org/general/3dgraph/
 https://youtu.be/sQDFydEtBLE?si=zzJwtL8zsmL6hU8d
 https://www.youtube.com/watch?v=qw0oY6Ld-L0&t=0s
+
+
+CUBE VERTICES IN ORDER:
+CUBE 1 (ORIGIN)
+[-1, -1, 1]
+[1, -1, 1]
+[1, 1, 1]
+[-1, 1, 1]
+[-1, -1, -1]
+[1, -1, -1]
+[1, 1, -1]
+[-1, 1, -1]
